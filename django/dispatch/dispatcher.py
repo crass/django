@@ -1,3 +1,4 @@
+import sys
 import weakref
 import threading
 
@@ -206,6 +207,7 @@ class Signal(object):
             try:
                 response = receiver(signal=self, sender=sender, **named)
             except Exception, err:
+                err.exc_info = sys.exc_info()
                 responses.append((receiver, err))
             else:
                 responses.append((receiver, response))
