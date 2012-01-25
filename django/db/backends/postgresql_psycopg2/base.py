@@ -144,8 +144,9 @@ class DatabaseWrapper(BaseDatabaseWrapper):
         cursor = self.connection.cursor()
         cursor.tzinfo_factory = None
         if new_connection:
-            if set_tz:
-                cursor.execute("SET TIME ZONE %s", [settings_dict['TIME_ZONE']])
+#            if set_tz:
+#                cursor.execute("SET TIME ZONE %s", [settings_dict['TIME_ZONE']$
+            cursor.execute("SET TIME ZONE %s", ['UTC'])
             if not hasattr(self, '_version'):
                 self.__class__._version = get_version(cursor)
             if self._version[0:2] < (8, 0):
