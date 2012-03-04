@@ -1135,6 +1135,9 @@ class ModelAdmin(BaseModelAdmin):
             # and the 'invalid=1' parameter was already in the query string,
             # something is screwed up with the database, so display an error
             # page.
+            if settings.DEBUG:
+                raise
+            
             if ERROR_FLAG in request.GET.keys():
                 return SimpleTemplateResponse('admin/invalid_setup.html', {
                     'title': _('Database error'),
