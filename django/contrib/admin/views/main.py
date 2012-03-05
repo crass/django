@@ -319,7 +319,8 @@ class ChangeList(object):
             # are not in the correct type, so we might get FieldError,
             # ValueError, ValidationError, or ? from a custom field that raises
             # yet something else when handed impossible data.
-            raise IncorrectLookupParameters(e)
+            import sys
+            raise IncorrectLookupParameters, IncorrectLookupParameters(e), sys.exc_info()[2]
 
         # Use select_related() if one of the list_display options is a field
         # with a relationship and the provided queryset doesn't already have
